@@ -1,65 +1,140 @@
-import Image from "next/image";
+'use client';
+
+import Image from 'next/image';
+import { useRouter } from 'next/navigation';
+
 
 export default function Home() {
+  const router = useRouter();
+  //const { downloadCSV } = useDownloadData();
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleReadMore = () => {
+    window.open('https://www.humanrightsfirst.org', '_blank', 'noopener,noreferrer');
+  };
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
+    <div className="flex flex-col w-full bg-white text-gray-800">
+      {/* Header Section */}
+      <div className="flex flex-col items-center justify-center bg-[#666555] py-16 text-white px-4">
+        <h1 className="text-5xl mb-4 text-center font-serif">Asylum Office Grant Rate Tracker</h1>
+        <p className="text-xl max-w-4xl text-center">
+          The Asylum Office Grant Rate Tracker provides asylum seekers, researchers, policymakers, and the public an interactive tool to explore USCIS data on Asylum Office decisions
+        </p>
+      </div>
+
+      {/* Main Content - Graphs Section */}
+      <div className="flex flex-col items-center py-20 px-4 ">
+        <div className="flex flex-wrap justify-center gap-20 mb-12">
+          {/* Using public folder paths directly */}
+          <div className="flex flex-col items-center max-w-xs">
+            <Image 
+              src="/bar-graph.png" 
+              alt="Search Grant Rates By Office" 
+              width={320} 
+              height={256} 
+              className="object-contain mb-6 rounded-2xl" 
+            />
+            <h3 className="text-2xl font-semibold">Search Grant Rates By Office</h3>
+          </div>
+          <div className="flex flex-col items-center max-w-xs">
+            <Image 
+              src="/pie-chart.png" 
+              alt="Search Grant Rates By Nationality" 
+              width={300} 
+              height={256} 
+              className="object-contain mb-6 rounded-2xl" 
+            />
+            <h3 className="text-2xl font-semibold">Search Grant Rates By Nationality</h3>
+          </div>
+          <div className="flex flex-col items-center max-w-xs">
+            <Image 
+              src="/line-graph.png" 
+              alt="Search Grant Rates Over Time" 
+              width={320} 
+              height={256} 
+              className="object-contain mb-6 rounded-2xl" 
+            />
+            <h3 className="text-2xl font-semibold">Search Grant Rates Over Time</h3>
+          </div>
+        </div>
+
+        <div className="flex gap-4">
+          <button
+            onClick={() => router.push('/graphs')}
+            className="bg-[#666555] text-white px-6 py-2 font-semibold hover:bg-[#555444] transition-colors"
+          >
+            View the Data
+          </button>
+          <button
+           // onClick={() => downloadCSV()}
+            className="bg-[#666555] text-white px-6 py-2 font-semibold hover:bg-[#555444] transition-colors"
+          >
+            Download the Data
+          </button>
+        </div>
+      </div>
+
+      {/* Info Section */}
+      <div className="flex flex-wrap items-center justify-center py-20 px-10 gap-20">
+        <Image 
+          src="/paper-stack.jpg" 
+          alt="HRF Paper Stacks" 
+          width={600} 
+          height={400} 
+          className="object-cover rounded-3xl" 
         />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file. EH
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+        <div className="max-w-xl">
+          <p className="text-xl leading-relaxed">
+            Human Rights First has created a search tool to give you a user-friendly way to explore a data set of asylum decisions between FY 2016 and May 2021 by the USCIS Asylum Office...
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      </div>
+
+      {/* Systemic Disparity Insights Section */}
+      <div className="flex flex-col items-center py-20 px-4">
+        <h2 className="text-4xl mb-16">Systemic Disparity Insights</h2>
+        <div className="flex flex-wrap justify-center gap-20 mb-16 max-w-7xl">
+          <div className="flex flex-col items-center max-w-sm text-center">
+            <h4 className="text-5xl mb-6">36%</h4>
+            <p className="text-lg">
+              By the end of the Trump administration, the average asylum office grant rate had fallen 36%...
+            </p>
+          </div>
+          <div className="flex flex-col items-center max-w-sm text-center">
+            <h4 className="text-5xl mb-6">5%</h4>
+            <p className="text-lg">
+              The New York asylum office grant rate dropped to 5 percent in fiscal year 2020.
+            </p>
+          </div>
+          <div className="flex flex-col items-center max-w-sm text-center">
+            <h4 className="text-5xl mb-6">6x Lower</h4>
+            <p className="text-lg">
+              The New York asylum office&apos;s average grant rate was 6 times lower than the San Francisco asylum office.
+            </p>
+          </div>
         </div>
-      </main>
+        <button
+          onClick={handleReadMore}
+          className="bg-[#666555] text-white px-8 py-2 font-semibold hover:bg-[#555444] transition-colors mb-20"
+        >
+          Read More
+        </button>
+
+        <button
+          onClick={scrollToTop}
+          className="text-lg font-semibold hover:underline"
+        >
+          Back To Top ^
+        </button>
+      </div>
+
+      <div className="mt-10 py-4 opacity-50 text-center">
+        {/* {'Type this into Canvas: ' + decodeBase64('VGltZTJDb2RlIQ==')} */}
+      </div>
     </div>
   );
 }
