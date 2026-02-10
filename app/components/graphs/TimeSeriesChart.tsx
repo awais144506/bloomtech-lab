@@ -1,9 +1,8 @@
 'use client';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
-// Mapping your JSON 'yearResults' to Recharts format
 export const TimeSeriesChart = ({ data }: { data: any[] }) => {
-    
+
   const chartData = data.map(year => ({
     name: year.fiscal_year,
     Granted: parseFloat(year.granted.toFixed(2)),

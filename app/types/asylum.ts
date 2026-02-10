@@ -1,11 +1,4 @@
-// types/asylum.ts
-export interface OfficeData {
-  office: string;
-  granted: number;
-  adminClosed: number;
-  denied: number;
-  totalCases: number;
-}
+// app/types/asylum.ts
 
 export interface YearResult {
   fiscal_year: string;
@@ -13,13 +6,20 @@ export interface YearResult {
   denied: number;
   adminClosed: number;
   totalCases: number;
-  yearData: OfficeData[];
+  yearData: any[]; 
 }
 
+export interface CitizenshipResult {
+  citizenship: string;
+  granted: number;
+  adminClosed: number;
+  denied: number;
+  totalCases: number;
+}
+
+// This is the combined data your page will use
 export interface AsylumData {
   totalCases: number;
-  granted: number;
-  denied: number;
   yearResults: YearResult[];
-  citizenshipResults: any[];
+  citizenshipResults: CitizenshipResult[];
 }
