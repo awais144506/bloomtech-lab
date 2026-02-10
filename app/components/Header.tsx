@@ -1,4 +1,4 @@
-'use client'; 
+'use client';
 
 import { useUser } from '@auth0/nextjs-auth0/client';
 import Image from 'next/image';
@@ -27,26 +27,23 @@ export default function Header() {
                 <Link href='/graphs' className='text-white hover:text-amber-200'>
                     Graphs
                 </Link>
-                
-                {/* user exists means the person is authenticated */}
                 {user && (
                     <Link href='/profile' className='text-white hover:text-amber-200'>
                         Profile
                     </Link>
                 )}
 
-                {/* Integration of Logging Buttons */}
                 {!user ? (
-                    <a 
-                      href="/auth/login" 
-                      className="bg-white text-black px-4 py-2 rounded-md font-semibold hover:bg-gray-200 transition-colors"
+                    <a
+                        href="/auth/login"
+                        className="bg-white text-black px-4 py-2 rounded-md font-semibold hover:bg-gray-200 transition-colors"
                     >
                         Login
                     </a>
                 ) : (
-                    <a 
-                      href="/auth/logout" 
-                      className="text-white border border-white px-4 py-2 rounded-md hover:bg-white hover:text-black transition-all"
+                    <a
+                        href="/auth/logout"
+                        className="text-white border border-white px-4 py-2 rounded-md hover:bg-white hover:text-black transition-all"
                     >
                         Logout
                     </a>

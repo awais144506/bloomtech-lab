@@ -3,11 +3,46 @@
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
-
 export default function Home() {
   const router = useRouter();
-  //const { downloadCSV } = useDownloadData();
 
+ const handleDownloadData = async () => {
+    try {
+      const response = await fetch('https://asylum-be.onrender.com/fiscalSummary'); 
+      if (!response.ok) throw new Error('Failed to fetch data');
+      
+      const result = await response.json();
+      if (!result || typeof result !== 'object') {
+        alert('No valid data found.');
+        return;
+      }
+      const headers = Object.keys(result).join(',');
+
+      const row = Object.values(result).map(value => {
+        const val = value === null || value === undefined ? "" : String(value);
+        return `"${val.replace(/"/g, '""')}"`;
+      }).join(',');
+
+      const csvContent = `${headers}\n${row}`;
+      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      
+      link.setAttribute('href', url);
+      link.setAttribute('download', 'asylum_summary_data.csv');
+      link.style.visibility = 'hidden';
+      
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      
+      URL.revokeObjectURL(url);
+
+    } catch (error) {
+      console.error('Error downloading CSV:', error);
+      alert('Could not download data. Check the console for details.');
+    }
+  };
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -29,7 +64,6 @@ export default function Home() {
       {/* Main Content - Graphs Section */}
       <div className="flex flex-col items-center py-20 px-4 ">
         <div className="flex flex-wrap justify-center gap-20 mb-12">
-          {/* Using public folder paths directly */}
           <div className="flex flex-col items-center max-w-xs">
             <Image 
               src="/bar-graph.png" 
@@ -70,7 +104,7 @@ export default function Home() {
             View the Data
           </button>
           <button
-           // onClick={() => downloadCSV()}
+            onClick={handleDownloadData}
             className="bg-[#666555] text-white px-6 py-2 font-semibold hover:bg-[#555444] transition-colors cursor-pointer"
           >
             Download the Data
@@ -130,10 +164,6 @@ export default function Home() {
         >
           Back To Top ^
         </button>
-      </div>
-
-      <div className="mt-10 py-4 opacity-50 text-center">
-        {/* {'Type this into Canvas: ' + decodeBase64('VGltZTJDb2RlIQ==')} */}
       </div>
     </div>
   );

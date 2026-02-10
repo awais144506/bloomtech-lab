@@ -1,4 +1,4 @@
-// app/constants/officeCoords.ts
+
 export const OFFICE_COORDS: Record<string, [number, number]> = {
   "Houston, TX": [29.7604, -95.3698],
   "New York, NY": [40.7128, -74.0060],

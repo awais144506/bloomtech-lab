@@ -6,7 +6,7 @@ import { OFFICE_COORDS } from '@/app/constants/officeCords';
 
 export default function AsylumHeatMap({ yearData }: { yearData: any[] }) {
   return (
-    <div className="h-[500px] w-full rounded-xl overflow-hidden shadow-inner border border-gray-200">
+    <div className="h-125 w-full rounded-xl overflow-hidden shadow-inner border border-gray-200">
       <MapContainer 
         center={[37.0902, -95.7129]} 
         zoom={4} 
@@ -20,16 +20,13 @@ export default function AsylumHeatMap({ yearData }: { yearData: any[] }) {
         {yearData.map((office) => {
           const coords = OFFICE_COORDS[office.office];
           if (!coords) return null;
-
-          // Scale radius based on total cases
           const radius = Math.sqrt(office.totalCases) / 2;
-
           return (
             <CircleMarker
               key={office.office}
               center={coords}
-              radius={radius > 5 ? radius : 5} // Minimum radius
-              fillColor={office.granted > 25 ? '#10B981' : '#EF4444'} // Green if > 25%, Red otherwise
+              radius={radius > 5 ? radius : 5} 
+              fillColor={office.granted > 25 ? '#10B981' : '#EF4444'}
               color="#fff"
               weight={1}
               fillOpacity={0.6}

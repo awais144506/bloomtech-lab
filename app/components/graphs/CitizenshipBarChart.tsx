@@ -2,30 +2,24 @@
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 export const CitizenshipBarChart = ({ data }: { data: any[] }) => {
-  // 1. Add a safety check to make sure 'data' exists before mapping
   if (!data || !Array.isArray(data)) return null;
-
   const chartData = data.map((item) => {
-    // 2. Use the Nullish Coalescing Operator (??) to handle null values safely
     const granted = item.granted ?? 0;
     const denied = item.denied ?? 0;
     const adminClosed = item.adminClosed ?? 0;
 
     return {
       name: item.citizenship || 'Unknown',
-      // 3. Now .toFixed(2) is safe because the variable is guaranteed to be a number
       Granted: parseFloat(granted.toFixed(2)),
       Denied: parseFloat(denied.toFixed(2)),
       'Admin Closed': parseFloat(adminClosed.toFixed(2)),
       total: item.totalCases ?? 0,
     };
   });
-
-  // Sort by granted percentage for a cleaner look
   const sortedData = chartData.sort((a, b) => b.Granted - a.Granted);
 
   return (
-    <div className="h-[600px] w-full">
+    <div className="h-150 w-full">
       <h3 className="text-xl font-bold mb-6 text-gray-800 text-center">
         Outcome Rates by Citizenship (%)
       </h3>
@@ -40,7 +34,7 @@ export const CitizenshipBarChart = ({ data }: { data: any[] }) => {
           <YAxis dataKey="name" type="category" width={150} tick={{ fontSize: 12 }} />
           <Tooltip 
             cursor={{ fill: '#f3f4f6' }}
-            formatter={(value: number) => [`${value}%`]}
+            formatter={(value: number | undefined) => value !== undefined ? `${value}%` : ''}
           />
           <Legend verticalAlign="top" height={36} />
           <Bar dataKey="Granted" stackId="a" fill="#4F46E5" />

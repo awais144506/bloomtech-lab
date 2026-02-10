@@ -1,4 +1,4 @@
-// middleware.ts (in the root folder)
+
 import { auth0 } from "./app/lib/auth0";
 import { NextRequest } from "next/server";
 
