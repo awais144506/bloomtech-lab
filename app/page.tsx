@@ -65,13 +65,13 @@ export default function Home() {
         <div className="flex gap-4">
           <button
             onClick={() => router.push('/graphs')}
-            className="bg-[#666555] text-white px-6 py-2 font-semibold hover:bg-[#555444] transition-colors"
+            className="bg-[#666555] text-white px-6 py-2 font-semibold hover:bg-[#555444] transition-colors cursor-pointer"
           >
             View the Data
           </button>
           <button
            // onClick={() => downloadCSV()}
-            className="bg-[#666555] text-white px-6 py-2 font-semibold hover:bg-[#555444] transition-colors"
+            className="bg-[#666555] text-white px-6 py-2 font-semibold hover:bg-[#555444] transition-colors cursor-pointer"
           >
             Download the Data
           </button>
