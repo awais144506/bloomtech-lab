@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 export default function Header() {
-    const { user, error, isLoading } = useUser();
+    const { user } = useUser();
     return (
         <header className='flex w-full bg-[#666555] justify-between px-14 items-center'>
             <div className='flex items-center'>
@@ -38,14 +38,14 @@ export default function Header() {
                 {/* Integration of Logging Buttons */}
                 {!user ? (
                     <a 
-                      href="/api/auth/login" 
+                      href="/auth/login" 
                       className="bg-white text-black px-4 py-2 rounded-md font-semibold hover:bg-gray-200 transition-colors"
                     >
                         Login
                     </a>
                 ) : (
                     <a 
-                      href="/api/auth/logout" 
+                      href="/auth/logout" 
                       className="text-white border border-white px-4 py-2 rounded-md hover:bg-white hover:text-black transition-all"
                     >
                         Logout
