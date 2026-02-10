@@ -38,14 +38,14 @@ export default function Header() {
                 {/* Integration of Logging Buttons */}
                 {!user ? (
                     <a 
-                      href="/api/auth/login" 
+                      href="/auth/login"
                       className="bg-white text-black px-4 py-2 rounded-md font-semibold hover:bg-gray-200 transition-colors"
                     >
                         Login
                     </a>
                 ) : (
                     <a 
-                      href="/api/auth/logout" 
+                      href="/auth/logout"
                       className="text-white border border-white px-4 py-2 rounded-md hover:bg-white hover:text-black transition-all"
                     >
                         Logout
